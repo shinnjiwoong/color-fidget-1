@@ -1,0 +1,101 @@
+body{
+  font-family: "forma-djr-display", sans-serif;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  width: 100vw;
+  height: 100vh;
+}
+
+header, footer{
+  writing-mode: vertical-rl;
+  background-color: white;
+  position: fixed;
+  height: 100%;
+  display: flex;
+  justify-content: space-between;
+  padding: 10px ;
+  border-right: 2px solid black;
+}
+
+footer{
+  top: 0;
+  right: 0;
+  border-right: none;
+  border-left: 2px solid black;
+}
+
+#title{
+  margin: 0;
+  padding: 0;
+  font-size: 450%;
+  font-weight: 700;
+  transform: rotate(180deg);
+}
+
+.footer-btn{
+  border: none;
+  background-color: white;
+  margin: 0;
+  padding: 20px 10px;
+  font-size: 250%;
+  font-weight: 700;
+  cursor: grab;
+}
+
+.footer-btn:hover{
+  background-color: black;
+  color: white;
+}
+
+main{
+  background-color: white;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+}
+
+#fidget{
+  /* animation: rotate 2s infinite linear; */
+  width: 500px;
+  transform-origin: center;
+}
+
+@keyframes rotate {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+.color-wheel{
+  cursor: grab;
+}
+
+#color_1{
+  fill: rgb(46, 255, 46);
+  transition: all 0.1s ease-in-out;
+}
+
+/* #color_1:hover{
+  fill: #fff;
+} */
+
+#color_2{
+  fill: yellow;
+}
+
+#color_3{
+  fill: rgb(255, 0, 255);
+}
+
+#cursor{
+  color: white;
+  font-size: xx-large;
+  font-weight: 500;
+  mix-blend-mode: difference;
+  position: absolute;
+  pointer-events: none;
+  transform: translateX(-50%);
+}
