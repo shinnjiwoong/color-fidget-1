@@ -42,19 +42,51 @@ async function wait(){
     }, 500)
 }
 
+let colors = ['#ffffff', '#ffffff', '#ffffff', '#ffffff']
+
 async function spin(){
     console.log('spin!')
 
-    for(let i = 0; i < 20; i++){
-        setTimeout(()=>{
-            colorBlocks.forEach(async (e, index) => {
-                let colorCode = await generateColor();
+    for(let i = 0; i < 100; i++){
+        setTimeout(async ()=>{
+            const randomIndex = Math.floor(Math.random()*4);
+
+            let colorCode = await generateColor();
+
+            colorBlocks[randomIndex].style.backgroundColor = colorCode[0]
+
+            colors[randomIndex] = colorCode[0];
+
+            // colorBlocks.forEach(async (e, index) => {
+            //     let colorCode = await generateColor();
         
-                e.style.backgroundColor = colorCode[0]
-            })
-        }, 100*i)
+            //     e.style.backgroundColor = colorCode[0]
+            // })
+        }, 10*i)
     }
+
+    
 }
+
+colorBlocks.forEach((e,index) => {
+    e.addEventListener('mouseover', ()=>{
+        e.innerText = colors[index].toUpperCase();
+    })
+
+    e.addEventListener('mouseleave', ()=>{
+        e.innerText = ''
+    })
+
+    e.addEventListener('click', ()=>{
+        navigator.clipboard.writeText(colors[index])
+
+        e.innerText = 'COPIED!'
+
+        setTimeout(()=>{
+            e.innerText = colors[index].toUpperCase();
+        }, 500)
+    })
+})
 
 const cursor = document.getElementById('cursor')
 
@@ -75,17 +107,6 @@ spinBtn.addEventListener('click', ()=>{
         introSection.style.display = 'none'
     },500);
 })
-
-// function requestOrientationPermission(){
-//     DeviceMotionEvent.requestPermission()
-//     .then(response => {
-//         if (response == 'granted') {
-//             //실행하고자 하는 코드 삽입.
-//             spin();
-//         }
-//     })
-//     .catch(console.error)
-// }
 
 function requestOrientationPermission(){
     DeviceMotionEvent.requestPermission()
