@@ -76,12 +76,27 @@ spinBtn.addEventListener('click', ()=>{
     },500);
 })
 
+// function requestOrientationPermission(){
+//     DeviceMotionEvent.requestPermission()
+//     .then(response => {
+//         if (response == 'granted') {
+//             //실행하고자 하는 코드 삽입.
+//             spin();
+//         }
+//     })
+//     .catch(console.error)
+// }
+
 function requestOrientationPermission(){
     DeviceMotionEvent.requestPermission()
     .then(response => {
         if (response == 'granted') {
-            //실행하고자 하는 코드 삽입.
-            spin();
+            window.addEventListener('devicemotion', (e) => {
+                if(e.acceleration.x > 10){
+                    spin()
+                }
+                
+            })
         }
     })
     .catch(console.error)
