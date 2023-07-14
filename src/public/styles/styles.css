@@ -1,5 +1,55 @@
+/* http://meyerweb.com/eric/tools/css/reset/ 
+   v2.0 | 20110126
+   License: none (public domain)
+*/
+
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed, 
+figure, figcaption, footer, header, hgroup, 
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+	margin: 0;
+	padding: 0;
+	border: 0;
+	font-size: 100%;
+	font: inherit;
+	vertical-align: baseline;
+}
+/* HTML5 display-role reset for older browsers */
+article, aside, details, figcaption, figure, 
+footer, header, hgroup, menu, nav, section {
+	display: block;
+}
+body {
+	line-height: 1;
+}
+ol, ul {
+	list-style: none;
+}
+blockquote, q {
+	quotes: none;
+}
+blockquote:before, blockquote:after,
+q:before, q:after {
+	content: '';
+	content: none;
+}
+table {
+	border-collapse: collapse;
+	border-spacing: 0;
+}
+
+
 body{
-  font-family: "forma-djr-display", sans-serif;
+  font-family: "neue-haas-unica", sans-serif;
   margin: 0;
   padding: 0;
   box-sizing: border-box;
@@ -7,7 +57,7 @@ body{
   height: 100vh;
 }
 
-header, footer{
+header{
   writing-mode: vertical-rl;
   background-color: white;
   position: fixed;
@@ -19,10 +69,13 @@ header, footer{
 }
 
 footer{
-  top: 0;
+  bottom: 0;
+  left: 0;
   right: 0;
   border-right: none;
-  border-left: 2px solid black;
+  position: fixed;
+  display: flex;
+  justify-content: space-between;
 }
 
 #title{
@@ -34,61 +87,34 @@ footer{
 }
 
 .footer-btn{
+  font-family: "neue-haas-unica", sans-serif;
   border: none;
-  background-color: white;
+  background-color: rgba(255, 255, 255, 0);
   margin: 0;
   padding: 20px 10px;
   font-size: 250%;
-  font-weight: 700;
+  font-weight: 300;
   cursor: grab;
 }
 
 .footer-btn:hover{
-  background-color: black;
-  color: white;
+  text-decoration: underline 2px black;
+  font-style: italic;
 }
 
 main{
   background-color: white;
   width: 100%;
   height: 100%;
-  display: flex;
-  justify-content: center;
-  flex-direction: column;
-  align-items: center;
 }
 
-#fidget{
-  /* animation: rotate 2s infinite linear; */
-  width: 500px;
-  transform-origin: center;
-}
 
 @keyframes rotate {
   0% { transform: rotate(0deg); }
   100% { transform: rotate(360deg); }
 }
 
-.color-wheel{
-  cursor: grab;
-}
 
-#color_1{
-  fill: rgb(46, 255, 46);
-  transition: all 0.1s ease-in-out;
-}
-
-/* #color_1:hover{
-  fill: #fff;
-} */
-
-#color_2{
-  fill: yellow;
-}
-
-#color_3{
-  fill: rgb(255, 0, 255);
-}
 
 #cursor{
   color: white;
@@ -98,4 +124,58 @@ main{
   position: absolute;
   pointer-events: none;
   transform: translateX(-50%);
+}
+
+.color-section-wrapper{
+  display: flex;
+  width: 100%;
+  height: 50%;
+}
+
+.color-section{
+  display: inline-block;
+  width: 50%;
+  height: 100%;
+  background-color: white;
+}
+
+.color-section:hover{
+  background-color: white;
+}
+
+#c1{
+  border-right: solid 1px black;
+  border-bottom: solid 1px black;
+}
+
+#c2{
+  border-left: solid 1px black;
+  border-bottom: solid 1px black;
+}
+
+#c3{
+  border-right: solid 1px black;
+  border-top: solid 1px black;
+}
+
+#c4{
+  border-left: solid 1px black;
+  border-top: solid 1px black;
+}
+
+#spin-btn{
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%,-50%);
+  font-family: "neue-haas-unica", sans-serif;
+  font-size: x-large;
+  background-color: white;
+  border: solid 1.5px black;
+  cursor: grab;
+}
+
+#spin-btn:hover{
+  font-style: italic;
+  text-decoration: underline 1px black;
 }
