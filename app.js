@@ -17,6 +17,10 @@ app.get('/', (req, res) => {
     res.render('index.html')
 });
 
+app.get('/shake-color', (req, res) => {
+    res.render('index.html')
+});
+
 
 app.listen(PORT, ()=>{
     console.log('Runing the app!')

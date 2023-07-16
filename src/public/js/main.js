@@ -108,12 +108,15 @@ spinBtn.addEventListener('click', ()=>{
     },500);
 })
 
+const shakeInfo = document.getElementById('shake-info')
+
 function requestOrientationPermission(){
     DeviceMotionEvent.requestPermission()
     .then(response => {
         if (response == 'granted') {
             window.addEventListener('devicemotion', (e) => {
-                if(e.acceleration.x > 10){
+                shakeInfo.innerText = `${e.rotationRate}`
+                if(e.acceleration.x > 15){
                     spin()
                 }
                 
