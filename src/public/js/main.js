@@ -109,6 +109,7 @@ spinBtn.addEventListener('click', ()=>{
 })
 
 const shakeInfo = document.getElementById('shake-info')
+const startBtn = document.getElementById('start-btn')
 
 function requestOrientationPermission(){
     DeviceMotionEvent.requestPermission()
@@ -125,3 +126,5 @@ function requestOrientationPermission(){
     })
     .catch(console.error)
 }
+
+startBtn.addEventListener('click', requestOrientationPermission);
