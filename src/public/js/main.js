@@ -127,4 +127,6 @@ function requestOrientationPermission(){
     .catch(console.error)
 }
 
-startBtn.addEventListener('click', requestOrientationPermission);
+startBtn.addEventListener('click', ()=>{
+    requestOrientationPermission();
+});
