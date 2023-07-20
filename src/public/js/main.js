@@ -1,5 +1,6 @@
 const colorBlocks = document.querySelectorAll('.color-section');
-const spinBtn = document.getElementById('spin-btn')
+const colorItems = document.querySelectorAll('color-item');
+const startBtn = document.getElementById('text')
 
 async function getHex(element){
     switch(element){
@@ -53,7 +54,7 @@ async function spin(){
 
             let colorCode = await generateColor();
 
-            colorBlocks[randomIndex].style.backgroundColor = colorCode[0]
+            colorItems[randomIndex].style.backgroundColor = colorCode[0]
 
             colors[randomIndex] = colorCode[0];
 
@@ -68,7 +69,7 @@ async function spin(){
     
 }
 
-colorBlocks.forEach((e,index) => {
+colorItems.forEach((e,index) => {
     e.addEventListener('mouseover', ()=>{
         e.innerText = colors[index].toUpperCase();
     })
@@ -88,35 +89,17 @@ colorBlocks.forEach((e,index) => {
     })
 })
 
-const cursor = document.getElementById('cursor')
-
-
-window.addEventListener('mousemove', (e)=>{
-    let mouseX = e.clientX
-    let mouseY = e.clientY
-
-    cursor.style.top = mouseY + 'px'
-    cursor.style.left = mouseX + 'px'
-
-})
-
-spinBtn.addEventListener('click', ()=>{
+startBtn.addEventListener('click', ()=>{
     requestOrientationPermission();
-    introSection.style.opacity = '0%'
-    setTimeout(()=>{
-        introSection.style.display = 'none'
-    },500);
-})
+    spin()
+});
 
-const shakeInfo = document.getElementById('shake-info')
-const startBtn = document.getElementById('start-btn')
 
 function requestOrientationPermission(){
     DeviceMotionEvent.requestPermission()
     .then(response => {
         if (response == 'granted') {
             window.addEventListener('devicemotion', (e) => {
-                shakeInfo.innerText = `${e.rotationRate}`
                 if(e.acceleration.x > 15){
                     spin()
                 }
@@ -127,6 +110,3 @@ function requestOrientationPermission(){
     .catch(console.error)
 }
 
-startBtn.addEventListener('click', ()=>{
-    requestOrientationPermission();
-});
