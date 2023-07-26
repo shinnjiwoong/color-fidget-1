@@ -1,5 +1,5 @@
 const colorBlocks = document.querySelectorAll('.color-section');
-const colorItems = document.querySelectorAll('color-item');
+const colorItems = document.querySelectorAll('.color-item');
 const startBtn = document.getElementById('text')
 
 async function getHex(element){
@@ -32,7 +32,7 @@ async function generateColor(){
     let b_remainder = await getHex(b % 16);
 
     let code = '#' + r_quotient + r_remainder + g_quotient + g_remainder + b_quotient + b_remainder;
-
+    console.log(code)
     
     return [code, bg_r, bg_g, bg_b]
 }
@@ -50,19 +50,11 @@ async function spin(){
 
     for(let i = 0; i < 100; i++){
         setTimeout(async ()=>{
-            const randomIndex = Math.floor(Math.random()*4);
-
-            let colorCode = await generateColor();
-
-            colorItems[randomIndex].style.backgroundColor = colorCode[0]
-
-            colors[randomIndex] = colorCode[0];
-
-            // colorBlocks.forEach(async (e, index) => {
-            //     let colorCode = await generateColor();
+            colorItems.forEach(async (e, index) => {
+                let colorCode = await generateColor();
         
-            //     e.style.backgroundColor = colorCode[0]
-            // })
+                e.style.backgroundColor = colorCode[0]
+            })
         }, 10*i)
     }
 
@@ -70,22 +62,12 @@ async function spin(){
 }
 
 colorItems.forEach((e,index) => {
-    e.addEventListener('mouseover', ()=>{
-        e.innerText = colors[index].toUpperCase();
-    })
-
-    e.addEventListener('mouseleave', ()=>{
-        e.innerText = ''
-    })
-
     e.addEventListener('click', ()=>{
         navigator.clipboard.writeText(colors[index])
 
-        e.innerText = 'COPIED!'
+        e.style.backgroundColor = '#ffffff'
 
-        setTimeout(()=>{
-            e.innerText = colors[index].toUpperCase();
-        }, 500)
+        e.innerText = 'COPIED!'
     })
 })
 
@@ -110,3 +92,10 @@ function requestOrientationPermission(){
     .catch(console.error)
 }
 
+window.onload = () => {
+    colorItems.forEach(async (e)=>{
+        let colorCode = await generateColor();
+
+        e.style.backgroundColor = colorCode[0]
+    })
+}
