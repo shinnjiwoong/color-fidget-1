@@ -53,10 +53,10 @@ body{
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  display: flex;
+  /* display: flex;
   flex-direction: column;
   justify-content: center;
-  align-items: center;
+  align-items: center; */
   width: 100vw;
   height: 100vh;
   background-color: white;
@@ -66,11 +66,22 @@ header{
   display: flex;
   justify-content: start;
   width: 100%;
+  background-color: black;
+}
+
+#header-left{
+  margin-left: 10px;
+  border-left: solid 1.5px white;
+  border-right: solid 1.5px white;
+}
+
+#header-left:hover{
+  background-color: white;
 }
 
 main{
   background-color: white;
-  width: 30%;
+  width: 100%;
   height: 90%;
   position: relative;
   display: flex;
@@ -123,8 +134,8 @@ main{
 }
 
 #grid-container{
-  width: 100%;
-  height: 100%;
+  width: 20%;
+  height: 90%;
   display: grid;
   grid-template-rows: repeat(4, 1fr);
   grid-template-columns: repeat(4, 1fr);
@@ -246,13 +257,16 @@ main{
   /* position: absolute; */
   font-family: "neue-haas-unica", sans-serif;
   font-weight: 400;
-  font-size: x-large;
-  margin-left: 20px;
-  padding: 20px;
-  color: black;
+  font-size: large;
+  padding: 10px 5px;
+  color: white;
   border: solid 1.5px black;
   cursor: grab;
-  animation: shake 0.1s infinite linear alternate-reverse;
+  /* animation: shake 0.1s infinite linear alternate-reverse; */
+}
+
+#text:hover{
+  color: black;
 }
 
 #color-code{
@@ -276,9 +290,11 @@ main{
 /* Media Query */
 
 @media (min-width:320px) and (max-width:768px){
-  main{
+  body{
     margin-top: 50px;
     margin-bottom: 40px;
+  }
+  #grid-container{
     width: 100%;
   }
 }

@@ -118,7 +118,7 @@ colorItems.forEach((e, index) => {
 })
 
 startBtn.addEventListener('click', ()=>{
-    // requestOrientationPermission();
+    requestOrientationPermission();
     spin()
 });
 
