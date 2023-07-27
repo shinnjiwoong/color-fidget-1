@@ -1,6 +1,9 @@
 const colorBlocks = document.querySelectorAll('.color-section');
 const colorItems = document.querySelectorAll('.color-item');
 const startBtn = document.getElementById('text')
+const eyeCenters = document.querySelectorAll('.eye-center')
+
+let colors = ['#ffffff', '#ffffff', '#ffffff', '#ffffff', '#ffffff', '#ffffff', '#ffffff', '#ffffff', '#ffffff', '#ffffff', '#ffffff', '#ffffff', '#ffffff', '#ffffff', '#ffffff', '#ffffff']
 
 async function getHex(element){
     switch(element){
@@ -15,7 +18,7 @@ async function getHex(element){
     return element
 }
 
-async function generateColor(){
+async function generateColor(index){
     const r = Math.floor(Math.random()*255)
     const g = Math.floor(Math.random()*255)
     const b = Math.floor(Math.random()*255)
@@ -32,8 +35,9 @@ async function generateColor(){
     let b_remainder = await getHex(b % 16);
 
     let code = '#' + r_quotient + r_remainder + g_quotient + g_remainder + b_quotient + b_remainder;
-    console.log(code)
     
+    colors[index] = code
+
     return [code, bg_r, bg_g, bg_b]
 }
 
@@ -43,17 +47,26 @@ async function wait(){
     }, 500)
 }
 
-let colors = ['#ffffff', '#ffffff', '#ffffff', '#ffffff']
+
 
 async function spin(){
-    console.log('spin!')
+    // console.log('spin!')
 
     for(let i = 0; i < 100; i++){
         setTimeout(async ()=>{
             colorItems.forEach(async (e, index) => {
-                let colorCode = await generateColor();
-        
-                e.style.backgroundColor = colorCode[0]
+                let colorCode = await generateColor(index);
+                const eyeTop = e.querySelector('.eye-bg-top')
+                const eyeBottom = e.querySelector('.eye-bg-bottom')
+                const eyeCenter = e.querySelector('.eye-center')
+
+                
+                e.style.border = `solid 3px ${colorCode[0]}`
+                eyeBottom.style.border = `solid 3px ${colorCode[0]}`
+                eyeTop.style.border = `solid 3px ${colorCode[0]}`
+                eyeTop.style.backgroundColor = colorCode[0]
+                eyeBottom.style.backgroundColor = colorCode[0]
+                eyeCenter.style.backgroundColor = colorCode[0]
             })
         }, 10*i)
     }
@@ -64,10 +77,11 @@ async function spin(){
 colorItems.forEach((e,index) => {
     e.addEventListener('click', ()=>{
         navigator.clipboard.writeText(colors[index])
+        const eyeTop = e.querySelector('.eye-bg-top')
+        const eyeBottom = e.querySelector('.eye-bg-bottom')
 
-        e.style.backgroundColor = '#ffffff'
-
-        e.innerText = 'COPIED!'
+        eyeTop.style.animation = 'blink 1s ease-in-out'
+        eyeBottom.style.animation = 'blink 1s ease-in-out'
     })
 })
 
@@ -92,10 +106,20 @@ function requestOrientationPermission(){
     .catch(console.error)
 }
 
-window.onload = () => {
-    colorItems.forEach(async (e)=>{
-        let colorCode = await generateColor();
 
-        e.style.backgroundColor = colorCode[0]
+window.addEventListener('mousemove', (e)=>{
+
+    const mouseX = e.clientX
+    const mouseY = e.clientY
+
+
+    eyeCenters.forEach((e)=>{
+        const eyeRect = e.getBoundingClientRect()
+        const centerX = eyeRect.left + eyeRect.width/2
+        const centerY = eyeRect.top + eyeRect.height/2
+        const widthRatio = (mouseX-centerX)*100/window.innerWidth
+        const heightRatio = (mouseY-centerY)*100/window.innerHeight
+
+        e.style.transform = `translate(${widthRatio}%,${heightRatio}%)`
     })
-}
+})

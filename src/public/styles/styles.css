@@ -63,13 +63,13 @@ body{
 
 header{
   display: flex;
-  justify-content: center;
+  justify-content: start;
   width: 100%;
 }
 
 main{
   background-color: white;
-  width: 100%;
+  width: 30%;
   height: 90%;
   position: relative;
   display: flex;
@@ -88,6 +88,7 @@ main{
   height: 100vh;
   top: 0;
   left: 0;
+  display: none;
 }
 
 #desktop-msg > h1{
@@ -124,14 +125,14 @@ main{
   width: 100%;
   height: 100%;
   display: grid;
-  grid-template-rows: repeat(5, 1fr);
+  grid-template-rows: repeat(4, 1fr);
   grid-template-columns: repeat(4, 1fr);
-  column-gap: 1px;
-	row-gap: 1px;
+  column-gap: 10px;
+	row-gap: 20px;
 }
 
 .color-item{
-  /* border: solid 1px black; */
+  border: solid 3px black;
   font-family: "neue-haas-unica", sans-serif;
   font-weight: 400;
   font-size: large;
@@ -139,10 +140,86 @@ main{
   display: flex;
   justify-content: center;
   align-items: center;
-  /* margin: 20px; */
-  background-color: rgb(213, 255, 105);
   border-radius: 50px;
 }
+
+.eye-wrapper{
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: grab;
+  overflow-y: hidden;
+}
+
+.eye-bg-top{
+  border-top-left-radius: 100px;
+  border-top-right-radius: 100px;
+  width: 100%;
+  height: 20%;
+  position: absolute;
+  top: 0;
+  left: 50;
+  background-color: black;
+  z-index: 1;
+  border: solid 2px black;
+  /* animation: blink 1s ease-in-out infinite; */
+}
+
+.eye-bg-bottom{
+  border-bottom-left-radius: 50px;
+  border-bottom-right-radius: 50px;
+  width: 100%;
+  height: 20%;
+  position: absolute;
+  bottom: 0;
+  left: 50;
+  background-color: black;
+  z-index: 1;
+  border: solid 2px black;
+  /* animation: blink 1s ease-in-out infinite; */
+}
+
+.eye-center{
+  position: absolute;
+  display: flex;
+  justify-content: center;
+  width: 40px;
+  height: 60px;
+  background-color: black;
+  border-radius: 50%;
+  z-index: 0;
+  /* animation: blinkEye 3s ease-in-out infinite; */
+}
+
+.eye-light{
+  background-color: white;
+  width: 15px;
+  height: 15px;
+  border-radius: 50%;
+  transform: translateX(70%);
+}
+
+@keyframes blink {
+  0% { height: 50%; }
+  100%{height: 20%;}
+}
+
+@keyframes blinkEye {
+  0% { 
+    height: 50px;
+    width: 50px; 
+  }
+  50% { 
+    height: 0px;
+    width: 0px; 
+  }
+  100%{
+    height: 50px;
+    width: 50px;
+  }
+}
+
 /* .color-item:nth-child(1){
   background-color: fuchsia;
 }
@@ -164,15 +241,20 @@ main{
   font-family: "neue-haas-unica", sans-serif;
   font-weight: 400;
   font-size: x-large;
+  margin-left: 20px;
+  padding: 20px;
   color: black;
-  mix-blend-mode: difference;
+  border: solid 1.5px black;
+  cursor: grab;
   animation: shake 0.1s infinite linear alternate-reverse;
 }
 
 /* Media Query */
 
 @media (min-width:320px) and (max-width:768px){
-  #desktop-msg{
-    display: none;
+  main{
+    margin-top: 50px;
+    margin-bottom: 40px;
+    width: 100%;
   }
 }
