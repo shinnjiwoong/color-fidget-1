@@ -2,6 +2,7 @@ const colorBlocks = document.querySelectorAll('.color-section');
 const colorItems = document.querySelectorAll('.color-item');
 const startBtn = document.getElementById('text')
 const eyeCenters = document.querySelectorAll('.eye-center')
+const colorCodeText = document.getElementById('color-code');
 
 let colors = ['#ffffff', '#ffffff', '#ffffff', '#ffffff', '#ffffff', '#ffffff', '#ffffff', '#ffffff', '#ffffff', '#ffffff', '#ffffff', '#ffffff', '#ffffff', '#ffffff', '#ffffff', '#ffffff']
 
@@ -74,7 +75,23 @@ async function spin(){
     
 }
 
-colorItems.forEach((e,index) => {
+function blink(e, index){
+    navigator.clipboard.writeText(colors[index])
+    const eyeTop = e.querySelector('.eye-bg-top')
+    const eyeBottom = e.querySelector('.eye-bg-bottom')
+
+    eyeTop.style.animation = 'blink 1s ease-in-out'
+    eyeBottom.style.animation = 'blink 1s ease-in-out'
+
+    eyeTop.addEventListener('animationend', ()=>{
+        eyeTop.style.animation = 'none'
+    } )
+    eyeBottom.addEventListener('animationend', ()=>{
+        eyeBottom.style.removeProperty('animation')
+    } )
+}
+
+colorItems.forEach((e, index) => {
     e.addEventListener('click', ()=>{
         navigator.clipboard.writeText(colors[index])
         const eyeTop = e.querySelector('.eye-bg-top')
@@ -82,11 +99,26 @@ colorItems.forEach((e,index) => {
 
         eyeTop.style.animation = 'blink 1s ease-in-out'
         eyeBottom.style.animation = 'blink 1s ease-in-out'
+
+        eyeTop.addEventListener('animationend', ()=>{
+            eyeTop.style.animation = 'none'
+        } )
+        eyeBottom.addEventListener('animationend', ()=>{
+            eyeBottom.style.removeProperty('animation')
+        } )
+
+        // colorCodeText.innerText = colors[index].toUpperCase()
+        colorCodeText.innerText = '찌르지마!'
+        colorCodeText.style.animation = 'textBlink 3s ease-in-out'
+
+        colorCodeText.addEventListener('animationend', ()=>{
+            colorCodeText.style.removeProperty('animation')
+        })
     })
 })
 
 startBtn.addEventListener('click', ()=>{
-    requestOrientationPermission();
+    // requestOrientationPermission();
     spin()
 });
 

@@ -59,6 +59,7 @@ body{
   align-items: center;
   width: 100vw;
   height: 100vh;
+  background-color: white;
 }
 
 header{
@@ -205,6 +206,11 @@ main{
   100%{height: 20%;}
 }
 
+@keyframes textBlink {
+  0% { opacity: 100%; }
+  100%{opacity: 0%;}
+}
+
 @keyframes blinkEye {
   0% { 
     height: 50px;
@@ -247,6 +253,24 @@ main{
   border: solid 1.5px black;
   cursor: grab;
   animation: shake 0.1s infinite linear alternate-reverse;
+}
+
+#color-code{
+  position: absolute;
+  font-family: "neue-haas-unica", sans-serif;
+  width: 100%;
+  height: 100%;
+  font-size: 23vw;
+  top: 0;
+  left: 0;
+  z-index: 100;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  pointer-events: none;
+  color: black;
+  /* mix-blend-mode: difference; */
+  opacity: 0%;
 }
 
 /* Media Query */
