@@ -291,8 +291,8 @@ main{
 
 @media (min-width:320px) and (max-width:768px){
   body{
-    margin-top: 50px;
-    margin-bottom: 40px;
+    /* margin-top: 50px;
+    margin-bottom: 40px; */
   }
   #grid-container{
     width: 100%;
