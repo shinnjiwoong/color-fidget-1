@@ -1,15 +1,24 @@
 const colorBlocks = document.querySelectorAll('.color-section');
 const colorItems = document.querySelectorAll('.color-item');
 const startBtn = document.getElementById('start-btn')
-const generateBtn = document.getElementById('text')
+// const generateBtn = document.getElementById('text')
 const eyeCenters = document.querySelectorAll('.eye-center')
 const colorCodeText = document.getElementById('color-code');
 const footer = document.getElementById('footer-wrapper');
 const optionBtn = document.getElementById('option-btn')
 const colorThemeBtn = document.querySelectorAll('.color-theme-btn')
 const introPage = document.getElementById('desktop-msg')
+const coloredText = document.querySelectorAll('.colored-text')
 
 let colors = ['#ffffff', '#ffffff', '#ffffff', '#ffffff', '#ffffff', '#ffffff', '#ffffff', '#ffffff', '#ffffff', '#ffffff', '#ffffff', '#ffffff', '#ffffff', '#ffffff', '#ffffff', '#ffffff']
+
+setInterval(()=>{
+    coloredText.forEach(async e => {
+        let color = await generateColor()
+
+        e.style.color = color[0]
+    })
+}, 1000)
 
 async function getHex(element){
     switch(element){
@@ -63,9 +72,9 @@ async function generateColor(index){
             b = Math.floor(Math.random()*155 + 100)
             break
         case 'RANDOM' :
-            r = Math.floor(Math.random()*155 + 100)
-            g = Math.floor(Math.random()*155 + 100)
-            b = Math.floor(Math.random()*155 + 100)
+            r = Math.floor(Math.random()*255)
+            g = Math.floor(Math.random()*255)
+            b = Math.floor(Math.random()*255)
             break
     }
 
@@ -81,9 +90,11 @@ async function generateColor(index){
     let b_remainder = await getHex(b % 16);
 
     let code = '#' + r_quotient + r_remainder + g_quotient + g_remainder + b_quotient + b_remainder;
-    
-    colors[index] = code
 
+    if(index){
+        colors[index] = code
+    }
+    
     return [code, bg_r, bg_g, bg_b]
 }
 
@@ -163,16 +174,16 @@ colorItems.forEach((e, index) => {
 })
 
 startBtn.addEventListener('click', async ()=>{
-    await requestOrientationPermission();
+    // await requestOrientationPermission();
     introPage.style.opacity = '0'
     setTimeout(function(){
         introPage.style.display = 'none'
     }, 500)
 });
 
-generateBtn.addEventListener('click', ()=>{
-    spin()
-})
+// generateBtn.addEventListener('click', ()=>{
+//     spin()
+// })
 
 
 async function requestOrientationPermission(){
