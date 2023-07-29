@@ -7,6 +7,7 @@ const colorCodeText = document.getElementById('color-code');
 const footer = document.getElementById('footer-wrapper');
 const optionBtn = document.getElementById('option-btn')
 const colorThemeBtn = document.querySelectorAll('.color-theme-btn')
+const introPage = document.getElementById('desktop-msg')
 
 let colors = ['#ffffff', '#ffffff', '#ffffff', '#ffffff', '#ffffff', '#ffffff', '#ffffff', '#ffffff', '#ffffff', '#ffffff', '#ffffff', '#ffffff', '#ffffff', '#ffffff', '#ffffff', '#ffffff']
 
@@ -162,7 +163,11 @@ colorItems.forEach((e, index) => {
 })
 
 startBtn.addEventListener('click', ()=>{
-    requestOrientationPermission();
+    // requestOrientationPermission();
+    introPage.style.opacity = '0'
+    setTimeout(function(){
+        introPage.style.display = 'none'
+    }, 500)
 });
 
 generateBtn.addEventListener('click', ()=>{
