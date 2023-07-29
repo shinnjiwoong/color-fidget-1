@@ -392,6 +392,9 @@ footer{
     padding-bottom: 40px;
 
   }
+  #contents-wrapper{
+    height: 762px;
+  }
   main{
     height: 90%;
   }
