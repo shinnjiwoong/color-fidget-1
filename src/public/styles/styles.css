@@ -103,20 +103,40 @@ main{
   background-color: white;
   position: fixed;
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
   width: 100vw;
   height: 100vh;
   top: 0;
   left: 0;
-  display: none;
+  z-index: 1100;
+  /* display: none; */
 }
 
-#desktop-msg > h1{
+#intro-text{
   font-family: "neue-haas-unica", sans-serif;
-  font-size: 200%;
+  font-size: medium;
   font-weight: 300;
-  animation: shake 0.05s infinite linear alternate-reverse;
+  padding: 0px 10px;
+  line-height: 150%;
+  word-break: keep-all;
+  /* animation: shake 0.05s infinite linear alternate-reverse; */
+}
+
+hr{
+  width: 100%;
+
+}
+
+b{
+  font-style: oblique;
+  color:fuchsia;
+  text-decoration: underline 1.5px fuchsia;
+}
+
+#start-btn{
+  padding: 10px 20px;
 }
 
 #desktop-msg > h1:hover{
@@ -316,7 +336,7 @@ footer{
 }
 
 .footer-show{
-  bottom: 0px;
+  bottom: 25px;
 }
 
 #option-title-wrapper{
@@ -365,7 +385,8 @@ footer{
 }
 
 .selected{
-  background-color: rgb(194, 194, 194) !important;
+  background-color: black !important;
+  color: white !important;
 }
 
 #random{
@@ -404,7 +425,7 @@ footer{
 
   }
   #contents-wrapper{
-    height: 724px;
+    height: 695px;
   }
   main{
     height: 80%;

@@ -1,6 +1,7 @@
 const colorBlocks = document.querySelectorAll('.color-section');
 const colorItems = document.querySelectorAll('.color-item');
-const startBtn = document.getElementById('text')
+const startBtn = document.getElementById('start-btn')
+const generateBtn = document.getElementById('text')
 const eyeCenters = document.querySelectorAll('.eye-center')
 const colorCodeText = document.getElementById('color-code');
 const footer = document.getElementById('footer-wrapper');
@@ -161,9 +162,12 @@ colorItems.forEach((e, index) => {
 })
 
 startBtn.addEventListener('click', ()=>{
-    // requestOrientationPermission();
-    spin()
+    requestOrientationPermission();
 });
+
+generateBtn.addEventListener('click', ()=>{
+    spin()
+})
 
 
 function requestOrientationPermission(){
@@ -205,18 +209,20 @@ optionBtn.addEventListener('click', ()=>{
 
 let colorOption = 'RANDOM'
 
-colorThemeBtn.forEach((e) => {
+colorThemeBtn.forEach((e, index) => {
     const colorThemeText = e.querySelector('.color-theme-text')
-    e.addEventListener('click', (e, index)=>{
-        let colorIndex = index
+    e.addEventListener('click', ()=>{
         colorOption = colorThemeText.innerText
         for(let i = 0; i < colorThemeBtn.length; i++){
-            if(i == colorIndex){
+            if(i == index){
                 colorThemeBtn[i].classList.add('selected')
+                colorThemeText.style.textDecoration = 'underline 1px black'
             }else{
                 colorThemeBtn[i].classList.remove('selected')
+                colorThemeText.style.textDecoration = 'none'
             }
         }
+        
         spin();
         console.log(colorOption)
     })
