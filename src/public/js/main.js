@@ -60,7 +60,7 @@ async function generateColor(index){
             g = 0
             b = Math.floor(Math.random()*155 + 100)
             break
-        default :
+        case 'RANDOM' :
             r = Math.floor(Math.random()*155 + 100)
             g = Math.floor(Math.random()*155 + 100)
             b = Math.floor(Math.random()*155 + 100)
@@ -162,7 +162,6 @@ colorItems.forEach((e, index) => {
 
 startBtn.addEventListener('click', ()=>{
     // requestOrientationPermission();
-    colorOption = ''
     spin()
 });
 
@@ -204,12 +203,20 @@ optionBtn.addEventListener('click', ()=>{
     footer.classList.toggle('footer-show')
 })
 
-let colorOption = ''
+let colorOption = 'RANDOM'
 
-colorThemeBtn.forEach(e => {
+colorThemeBtn.forEach((e) => {
     const colorThemeText = e.querySelector('.color-theme-text')
-    e.addEventListener('click', ()=>{
+    e.addEventListener('click', (e, index)=>{
+        let colorIndex = index
         colorOption = colorThemeText.innerText
+        for(let i = 0; i < colorThemeBtn.length; i++){
+            if(i == colorIndex){
+                colorThemeBtn[i].classList.add('selected')
+            }else{
+                colorThemeBtn[i].classList.remove('selected')
+            }
+        }
         spin();
         console.log(colorOption)
     })
