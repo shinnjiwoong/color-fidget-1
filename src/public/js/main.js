@@ -3,6 +3,9 @@ const colorItems = document.querySelectorAll('.color-item');
 const startBtn = document.getElementById('text')
 const eyeCenters = document.querySelectorAll('.eye-center')
 const colorCodeText = document.getElementById('color-code');
+const footer = document.getElementById('footer-wrapper');
+const optionBtn = document.getElementById('option-btn')
+const colorThemeBtn = document.querySelectorAll('.color-theme-btn')
 
 let colors = ['#ffffff', '#ffffff', '#ffffff', '#ffffff', '#ffffff', '#ffffff', '#ffffff', '#ffffff', '#ffffff', '#ffffff', '#ffffff', '#ffffff', '#ffffff', '#ffffff', '#ffffff', '#ffffff']
 
@@ -20,9 +23,49 @@ async function getHex(element){
 }
 
 async function generateColor(index){
-    const r = Math.floor(Math.random()*255)
-    const g = Math.floor(Math.random()*255)
-    const b = Math.floor(Math.random()*255)
+
+
+    let r = 0
+    let g = 0
+    let b = 0
+
+    switch(colorOption){
+        case 'RED':
+            r = Math.floor(Math.random()*155 + 100)
+            g = 0
+            b = 0
+            break
+        case 'ORANGE' :
+            r = Math.floor(Math.random()*155 + 100)
+            g = Math.floor(Math.random()*155 + 100)
+            b = 0
+            break
+        case 'YELLOW' :
+            r = Math.floor(Math.random()*155 + 100)
+            g = Math.floor(Math.random()*155 + 100)
+            b = 0
+            break
+        case 'GREEN' :
+            r = 0
+            g = Math.floor(Math.random()*155 + 100)
+            b = 0
+            break
+        case 'BLUE' :
+            r = 0
+            g = 0
+            b = Math.floor(Math.random()*155 + 100)
+            break
+        case 'PURPLE' :
+            r = Math.floor(Math.random()*155 + 100)
+            g = 0
+            b = Math.floor(Math.random()*155 + 100)
+            break
+        default :
+            r = Math.floor(Math.random()*155 + 100)
+            g = Math.floor(Math.random()*155 + 100)
+            b = Math.floor(Math.random()*155 + 100)
+            break
+    }
 
     const bg_r = 255 - r;
     const bg_g = 255 - g;
@@ -118,7 +161,8 @@ colorItems.forEach((e, index) => {
 })
 
 startBtn.addEventListener('click', ()=>{
-    requestOrientationPermission();
+    // requestOrientationPermission();
+    colorOption = ''
     spin()
 });
 
@@ -153,5 +197,20 @@ window.addEventListener('mousemove', (e)=>{
         const heightRatio = (mouseY-centerY)*100/window.innerHeight
 
         e.style.transform = `translate(${widthRatio}%,${heightRatio}%)`
+    })
+})
+
+optionBtn.addEventListener('click', ()=>{
+    footer.classList.toggle('footer-show')
+})
+
+let colorOption = ''
+
+colorThemeBtn.forEach(e => {
+    const colorThemeText = e.querySelector('.color-theme-text')
+    e.addEventListener('click', ()=>{
+        colorOption = colorThemeText.innerText
+        spin();
+        console.log(colorOption)
     })
 })
