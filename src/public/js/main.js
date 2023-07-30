@@ -9,6 +9,7 @@ const optionBtn = document.getElementById('option-btn')
 const colorThemeBtn = document.querySelectorAll('.color-theme-btn')
 const introPage = document.getElementById('desktop-msg')
 const coloredText = document.querySelectorAll('.colored-text')
+const desktopHideText = document.getElementById('desktop-hide-msg')
 
 
 let colors = ['#ffffff', '#ffffff', '#ffffff', '#ffffff', '#ffffff', '#ffffff', '#ffffff', '#ffffff', '#ffffff', '#ffffff', '#ffffff', '#ffffff', '#ffffff', '#ffffff', '#ffffff', '#ffffff']
@@ -16,12 +17,14 @@ let colors = ['#ffffff', '#ffffff', '#ffffff', '#ffffff', '#ffffff', '#ffffff', 
 let vh = (window.innerHeight) * 0.01;
 document.documentElement.style.setProperty('--vh', `${vh}px`);
 
-setInterval(()=>{
+setInterval(async ()=>{
+    let color = await generateColor()
     coloredText.forEach(async e => {
         let color = await generateColor()
 
         e.style.color = color[0]
     })
+    desktopHideText.style.color = color[0]
 }, 1000)
 
 async function getHex(element){
@@ -158,7 +161,7 @@ colorItems.forEach((e, index) => {
         const eyeBottom = e.querySelector('.eye-bg-bottom')
 
         eyeTop.style.animation = 'blink 1s ease-in-out'
-        eyeBottom.style.animation = 'blink 1s ease-in-out'
+        eyeBottom.style.animation = 'blink 0.5s ease-in-out'
 
         eyeTop.addEventListener('animationend', ()=>{
             eyeTop.style.animation = 'none'
@@ -168,8 +171,9 @@ colorItems.forEach((e, index) => {
         } )
 
         // colorCodeText.innerText = colors[index].toUpperCase()
-        colorCodeText.innerText = '찌르지마!'
-        colorCodeText.style.animation = 'textBlink 3s ease-in-out'
+        const eyeballTexts = ['찌르지 마!', '그만 찔러!', '아파!', '그만 해!', '아야!']
+        colorCodeText.innerText = eyeballTexts[Math.floor(Math.random()*eyeballTexts.length)]
+        colorCodeText.style.animation = 'textBlink 0.5s ease-in-out'
 
         colorCodeText.addEventListener('animationend', ()=>{
             colorCodeText.style.removeProperty('animation')
