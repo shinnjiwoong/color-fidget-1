@@ -10,7 +10,11 @@ const colorThemeBtn = document.querySelectorAll('.color-theme-btn')
 const introPage = document.getElementById('desktop-msg')
 const coloredText = document.querySelectorAll('.colored-text')
 
+
 let colors = ['#ffffff', '#ffffff', '#ffffff', '#ffffff', '#ffffff', '#ffffff', '#ffffff', '#ffffff', '#ffffff', '#ffffff', '#ffffff', '#ffffff', '#ffffff', '#ffffff', '#ffffff', '#ffffff']
+
+let vh = (window.innerHeight) * 0.01;
+document.documentElement.style.setProperty('--vh', `${vh}px`);
 
 setInterval(()=>{
     coloredText.forEach(async e => {
@@ -174,7 +178,7 @@ colorItems.forEach((e, index) => {
 })
 
 startBtn.addEventListener('click', async ()=>{
-    // await requestOrientationPermission();
+    await requestOrientationPermission();
     introPage.style.opacity = '0'
     setTimeout(function(){
         introPage.style.display = 'none'
@@ -242,4 +246,11 @@ colorThemeBtn.forEach((e, index) => {
         spin();
         console.log(colorOption)
     })
+})
+
+
+
+window.addEventListener('resize', ()=>{
+    let vh = (window.innerHeight) * 0.01;
+    document.documentElement.style.setProperty('--vh', `${vh}px`);
 })

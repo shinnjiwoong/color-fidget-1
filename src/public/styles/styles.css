@@ -59,15 +59,15 @@ body{
   align-items: start;
   width: 100vw;
   height: 100vh;
-  overflow-y: hidden;
+  /* overflow-y: hidden; */
   background-color: white;
 }
 
 #contents-wrapper{
   width: 100%;
-  height: 100%;
+  height: 100vh;
   position: relative;
-  overflow-y: hidden;
+  /* overflow-y: hidden; */
 }
 
 header{
@@ -104,7 +104,7 @@ main{
   font-family: "neue-haas-unica", sans-serif;
   font-size: xx-large;
   width: 200px;
-  font-weight: 400;
+  font-weight: 300;
   padding: 10px 20px;
   display:block;
   animation: slide 2s linear infinite ;
@@ -143,7 +143,7 @@ main{
   font-family: "neue-haas-unica", sans-serif;
   font-size: large;
   font-weight: 300;
-  padding: 20px 10px;
+  padding: 0px 10px;
   line-height: 150%;
   word-break: keep-all;
   border-bottom: solid 1.5px black;
@@ -163,11 +163,12 @@ b{
 
 #start-btn{
   font-family: "neue-haas-unica", sans-serif;
-  padding: 10px 20px;
+  /* padding: 10px 0px; */
   text-align: center;
   font-size: x-large;
   font-weight: 300;
-  border-bottom: solid 1.5px black;
+  margin-top: 30px;
+  border: solid 1.5px black;
 }
 
 
@@ -344,10 +345,10 @@ b{
   opacity: 0%;
 }
 
-footer{
+#footer-wrapper{
   width: 100%;
   position: absolute;
-  bottom: -207px;
+  bottom: 0%;
   transition: all 0.5s ease-in-out;
   z-index: 1000;
   border-top: solid 1.5px black;
@@ -360,12 +361,11 @@ footer{
 }
 
 .footer-show{
-  bottom: 55px;
+  transform: translateY(0%) !important;
 }
 
 #option-title-wrapper{
   display: flex;
-  height: 38.5px;
   justify-content: center;
   align-items: center;
   border-bottom: solid 1.5px black;
@@ -375,8 +375,9 @@ footer{
   font-family: "neue-haas-unica", sans-serif;
   font-size: large;
   font-weight: 400;
+  height: 100%;
   color: black;
-  padding: 5px;
+  /* padding: 5px; */
   background-color: white;
   border-top: none;
   border-bottom: none;
@@ -444,17 +445,51 @@ footer{
 
 @media (min-width:320px) and (max-width:768px){
   body{
-    /* margin-top: 50px; */
-    padding-bottom: 40px;
-
+    height: 100vh; /* Fallback for browsers that do not support Custom Properties */
+    height: calc(var(--vh, 1vh) * 100);
+    overflow-y: hidden;
   }
   #contents-wrapper{
-    height: 672px;
+    height: 100vh; /* Fallback for browsers that do not support Custom Properties */
+    height: calc(var(--vh, 1vh) * 100);
+    position: relative;
+  }
+  #main-contents{
+    height: 100vh; /* Fallback for browsers that do not support Custom Properties */
+    height: calc(var(--vh, 1vh) * 100);
   }
   main{
     height: 80%;
   }
+  #desktop-msg{
+    height: 100vh; /* Fallback for browsers that do not support Custom Properties */
+    height: calc(var(--vh, 1vh) * 100);
+    position: absolute;
+  }
+  header{
+    height: 10%;
+    /* padding: 10px 0px; */
+  }
+  #intro-text{
+    padding-top: 10px;
+    height: 90%;
+    text-align: center;
+  }
+  #start-btn{
+    height: 5%;
+    /* margin-bottom: 19.92px; */
+  }
   #grid-container{
     width: 100%;
   }
+  #footer-wrapper{
+    height: 100%;
+    bottom: 0%;
+    transform: translateY(90%);
+  }
+  #option-title-wrapper{
+    height: 10%;
+  }
 }
+
+/* iOS only */
