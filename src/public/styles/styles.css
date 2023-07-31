@@ -141,13 +141,21 @@ main{
 #intro-text{
   text-align: start;
   font-family: "neue-haas-unica", sans-serif;
-  font-size: large;
+  font-size: 150%;
   font-weight: 300;
   padding: 0px 10px;
-  line-height: 150%;
+  line-height: 120%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
   word-break: keep-all;
   border-bottom: solid 1.5px black;
   /* animation: shake 0.05s infinite linear alternate-reverse; */
+}
+
+.colored-text{
+  font-size: 80% !important;
 }
 
 hr{
@@ -165,10 +173,11 @@ b{
   font-family: "neue-haas-unica", sans-serif;
   /* padding: 10px 0px; */
   text-align: center;
-  font-size: x-large;
-  font-weight: 300;
+  font-size: xx-large;
+  font-weight: 200;
   margin-top: 30px;
-  border: solid 1.5px black;
+  border: solid 1px black;
+  border-radius: 30px;
 }
 
 
@@ -512,7 +521,11 @@ b{
     text-align: center;
   }
   #start-btn{
-    height: 5%;
+    height: 10%;
+    width: 70%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     /* margin-bottom: 19.92px; */
   }
   #grid-container{
