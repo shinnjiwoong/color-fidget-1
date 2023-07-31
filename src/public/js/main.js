@@ -154,20 +154,33 @@ function blink(e, index){
     } )
 }
 
+setInterval(()=>{
+    // const randSec = Math.random()*1000 + 1000
+    for(let i = 0; i <= eyeCenters.length - 2; i = i + 2){
+        const translateX = Math.random() * 40 - 20
+        const translateY = Math.random() * 40 - 20
+    
+        eyeCenters[i].style.transform = `translate(${translateX}%, ${translateY}%)`
+        eyeCenters[i+1].style.transform = `translate(${translateX}%, ${translateY}%)`
+    }
+}, 1000)
+
+
 colorItems.forEach((e, index) => {
+    const eyeTop = e.querySelector('.eye-bg-top')
+    const eyeBottom = e.querySelector('.eye-bg-bottom')
+
     e.addEventListener('click', ()=>{
         navigator.clipboard.writeText(colors[index])
-        const eyeTop = e.querySelector('.eye-bg-top')
-        const eyeBottom = e.querySelector('.eye-bg-bottom')
-
-        eyeTop.style.animation = 'blink 1s ease-in-out'
+        
+        eyeTop.style.animation = 'blink 0.5s ease-in-out'
         eyeBottom.style.animation = 'blink 0.5s ease-in-out'
 
         eyeTop.addEventListener('animationend', ()=>{
             eyeTop.style.animation = 'none'
         } )
         eyeBottom.addEventListener('animationend', ()=>{
-            eyeBottom.style.removeProperty('animation')
+            eyeBottom.style.animation = 'none'
         } )
 
         // colorCodeText.innerText = colors[index].toUpperCase()
@@ -182,7 +195,7 @@ colorItems.forEach((e, index) => {
 })
 
 startBtn.addEventListener('click', async ()=>{
-    await requestOrientationPermission();
+    // await requestOrientationPermission();
     introPage.style.opacity = '0'
     setTimeout(function(){
         introPage.style.display = 'none'
