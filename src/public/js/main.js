@@ -159,6 +159,11 @@ setInterval(()=>{
     for(let i = 0; i <= eyeCenters.length - 2; i = i + 2){
         const translateX = Math.random() * 40 - 20
         const translateY = Math.random() * 40 - 20
+
+        const randDelay = Math.random() + 0.3
+
+        eyeCenters[i].style.transitionDelay = `${randDelay}s`
+        eyeCenters[i+1].style.transitionDelay = `${randDelay}s`
     
         eyeCenters[i].style.transform = `translate(${translateX}%, ${translateY}%)`
         eyeCenters[i+1].style.transform = `translate(${translateX}%, ${translateY}%)`
