@@ -1,7 +1,6 @@
 const colorBlocks = document.querySelectorAll('.color-section');
 const colorItems = document.querySelectorAll('.color-item');
 const startBtn = document.getElementById('start-btn')
-// const generateBtn = document.getElementById('text')
 const eyeCenters = document.querySelectorAll('.eye-center')
 const colorCodeText = document.getElementById('color-code');
 const footer = document.getElementById('footer-wrapper');
@@ -11,9 +10,12 @@ const introPage = document.getElementById('desktop-msg')
 const coloredText = document.querySelectorAll('.colored-text')
 const desktopHideText = document.getElementById('desktop-hide-msg')
 
+// COLORS DATA
+import colorsData from '../colors.js' 
+
 
 let colors = ['#ffffff', '#ffffff', '#ffffff', '#ffffff', '#ffffff', '#ffffff', '#ffffff', '#ffffff', '#ffffff', '#ffffff', '#ffffff', '#ffffff', '#ffffff', '#ffffff', '#ffffff', '#ffffff']
-
+let colorOption = 'RANDOM'
 let vh = (window.innerHeight) * 0.01;
 document.documentElement.style.setProperty('--vh', `${vh}px`);
 
@@ -46,69 +48,38 @@ async function generateColor(index){
     let r = 0
     let g = 0
     let b = 0
+    let colorIndex
+    let randColor
 
-    switch(colorOption){
-        case 'RED':
-            r = Math.floor(Math.random()*155 + 100)
-            g = 0
-            b = 0
-            break
-        case 'ORANGE' :
-            r = Math.floor(Math.random()*155 + 100)
-            g = Math.floor(Math.random()*155 + 100)
-            b = 0
-            break
-        case 'YELLOW' :
-            r = Math.floor(Math.random()*155 + 100)
-            g = Math.floor(Math.random()*155 + 100)
-            b = 0
-            break
-        case 'GREEN' :
-            r = 0
-            g = Math.floor(Math.random()*155 + 100)
-            b = 0
-            break
-        case 'BLUE' :
-            r = 0
-            g = 0
-            b = Math.floor(Math.random()*155 + 100)
-            break
-        case 'PURPLE' :
-            r = Math.floor(Math.random()*155 + 100)
-            g = 0
-            b = Math.floor(Math.random()*155 + 100)
-            break
-        case 'RANDOM' :
-            r = Math.floor(Math.random()*255)
-            g = Math.floor(Math.random()*255)
-            b = Math.floor(Math.random()*255)
-            break
+    if(colorOption == 'RANDOM'){
+        r = Math.floor(Math.random()*255)
+        g = Math.floor(Math.random()*255)
+        b = Math.floor(Math.random()*255)
+
+        let r_quotient = await getHex(Math.floor(r / 16));
+        let r_remainder = await getHex(r % 16);
+        let g_quotient = await getHex(Math.floor(g / 16));
+        let g_remainder = await getHex(g % 16);
+        let b_quotient = await getHex(Math.floor(b / 16));
+        let b_remainder = await getHex(b % 16);
+
+        let code = '#' + r_quotient + r_remainder + g_quotient + g_remainder + b_quotient + b_remainder;
+
+        if(index){
+            colors[index] = code
+        }
+
+        return [code]
+    }else{
+        colorIndex = colorsData.findIndex(obj => obj.index === colorOption);
+        randColor = Math.floor(Math.random()*(colorsData[colorIndex].codes.length-1))
+
+        if(index){
+            colors[index] = colorsData[colorIndex].codes[randColor]
+        }
+
+        return [colorsData[colorIndex].codes[randColor]]
     }
-
-    const bg_r = 255 - r;
-    const bg_g = 255 - g;
-    const bg_b = 255 - b;
-
-    let r_quotient = await getHex(Math.floor(r / 16));
-    let r_remainder = await getHex(r % 16);
-    let g_quotient = await getHex(Math.floor(g / 16));
-    let g_remainder = await getHex(g % 16);
-    let b_quotient = await getHex(Math.floor(b / 16));
-    let b_remainder = await getHex(b % 16);
-
-    let code = '#' + r_quotient + r_remainder + g_quotient + g_remainder + b_quotient + b_remainder;
-
-    if(index){
-        colors[index] = code
-    }
-    
-    return [code, bg_r, bg_g, bg_b]
-}
-
-async function wait(){
-    setTimeout(()=>{
-        return true
-    }, 500)
 }
 
 
@@ -249,7 +220,7 @@ optionBtn.addEventListener('click', ()=>{
     footer.classList.toggle('footer-show')
 })
 
-let colorOption = 'RANDOM'
+
 
 colorThemeBtn.forEach((e, index) => {
     const colorThemeText = e.querySelector('.color-theme-text')
