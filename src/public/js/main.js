@@ -195,7 +195,7 @@ colorItems.forEach((e, index) => {
 })
 
 startBtn.addEventListener('click', async ()=>{
-    // await requestOrientationPermission();
+    await requestOrientationPermission();
     introPage.style.opacity = '0'
     setTimeout(function(){
         introPage.style.display = 'none'
