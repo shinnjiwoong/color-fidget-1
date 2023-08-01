@@ -109,24 +109,7 @@ async function spin(){
     
 }
 
-function blink(e, index){
-    navigator.clipboard.writeText(colors[index])
-    const eyeTop = e.querySelector('.eye-bg-top')
-    const eyeBottom = e.querySelector('.eye-bg-bottom')
-
-    eyeTop.style.animation = 'blink 1s ease-in-out'
-    eyeBottom.style.animation = 'blink 1s ease-in-out'
-
-    eyeTop.addEventListener('animationend', ()=>{
-        eyeTop.style.animation = 'none'
-    } )
-    eyeBottom.addEventListener('animationend', ()=>{
-        eyeBottom.style.removeProperty('animation')
-    } )
-}
-
 setInterval(()=>{
-    // const randSec = Math.random()*1000 + 1000
     for(let i = 0; i <= eyeCenters.length - 2; i = i + 2){
         const translateX = Math.random() * 40 - 20
         const translateY = Math.random() * 40 - 20
@@ -159,7 +142,6 @@ colorItems.forEach((e, index) => {
             eyeBottom.style.animation = 'none'
         } )
 
-        // colorCodeText.innerText = colors[index].toUpperCase()
         const eyeballTexts = ['찌르지 마!', '그만 찔러!', '아파!', '그만 해!', '아야!']
         colorCodeText.innerText = eyeballTexts[Math.floor(Math.random()*eyeballTexts.length)]
         colorCodeText.style.animation = 'textBlink 0.5s ease-in-out'
@@ -177,10 +159,6 @@ startBtn.addEventListener('click', async ()=>{
         introPage.style.display = 'none'
     }, 500)
 });
-
-// generateBtn.addEventListener('click', ()=>{
-//     spin()
-// })
 
 
 async function requestOrientationPermission(){
